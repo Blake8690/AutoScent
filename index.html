@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>AutoScent UF – Liten detalj. Stor skillnad.</title>
+  <meta name="description" content="AutoScent UF – doftpads till bilen från Vimmerby. Droppa din favoritdoft, kläm fast på ventilationen och kör.">
+  <meta name="theme-color" content="#0f1620">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-title-key="meta.title.home">
+  <a class="skip-link" href="#main" data-i18n="nav.skip">Hoppa till innehållet</a>
+
+  <!-- Laddningsskärm: emblemet ritas upp som en hastighetsmätare -->
+  <div class="loader" role="status">
+    <span class="visually-hidden" data-i18n="loader.label">Laddar AutoScent</span>
+    <div class="loader__inner" aria-hidden="true">
+      <svg class="loader__gauge" viewBox="0 0 200 200">
+        <circle class="loader__ring loader__ring--bg" cx="100" cy="100" r="75"/>
+        <circle class="loader__ring" cx="100" cy="100" r="75"/>
+        <g class="loader__ticks"></g>
+        <g class="loader__needle"><line x1="100" y1="100" x2="100" y2="48"/><circle cx="100" cy="100" r="6"/></g>
+      </svg>
+      <div class="loader__emblem" data-svg="emblem"></div>
+      <div class="loader__readout"><span class="loader__speed">0</span><span class="loader__unit">KM/H</span></div>
+      <div class="loader__brand">AUTOSCENT UF</div>
+    </div>
+  </div>
+
+  <canvas class="speed-lines" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html" aria-label="AutoScent UF">
+        <span class="brand__logo" data-svg="emblem" data-img="images/logo.png" data-img-alt="AutoScent UF"></span>
+        <span class="brand__name">AutoScent<small>UF</small></span>
+      </a>
+      <nav class="site-nav" id="site-nav" aria-label="Huvudmeny">
+        <a href="index.html" aria-current="page" data-i18n="nav.home">Hem</a>
+        <a href="produkt.html" data-i18n="nav.product">Produkt &amp; dofter</a>
+        <a href="kassa.html" data-i18n="nav.checkout">Kassa</a>
+      </nav>
+      <div class="header-actions">
+        <button class="lang-toggle" type="button">🇬🇧 EN</button>
+        <a class="round-btn cart-link" href="kassa.html" data-i18n-aria="nav.cart" aria-label="Varukorg">
+          <span data-svg="cart"></span>
+          <span class="cart-count" hidden>0</span>
+        </a>
+        <button class="round-btn menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-i18n-aria="nav.menu" aria-label="Öppna meny" data-svg="menu"></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO: emblemet roterar som ett metallemblem -->
+    <section class="hero">
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <span class="eyebrow" data-i18n="hero.eyebrow" data-reveal>Doftpads till bilen · Vimmerby</span>
+          <h1 class="hero__title" data-split="slogan">Liten detalj. Stor skillnad.</h1>
+          <p class="lead hero__lead" data-i18n="hero.lead" data-reveal style="--d:250ms">En liten tyg-pad med din favoritdoft, fäst på ventilationen – toppad med en 3D-printad design som gör bilen ännu snyggare.</p>
+          <div class="hero__actions" data-reveal style="--d:350ms">
+            <a class="btn btn--primary" href="produkt.html#bygg"><span data-i18n="hero.cta">Bygg ditt paket</span><span data-svg="arrow"></span></a>
+            <a class="btn btn--ghost" href="#dofter"><span data-i18n="hero.cta2">Utforska dofterna</span></a>
+          </div>
+          <p class="hero__price" data-reveal style="--d:450ms"><span data-i18n="hero.from">Från</span> <strong data-price="79">79 kr</strong></p>
+        </div>
+
+        <div class="hero__visual" aria-hidden="true">
+          <div class="hero__streaks">
+            <i style="top:8%;width:40%;--d:900ms;--delay:-100ms"></i>
+            <i style="top:18%;width:60%;--d:700ms;--delay:-400ms"></i>
+            <i style="top:30%;width:35%;--d:1100ms;--delay:-250ms"></i>
+            <i style="top:42%;width:70%;--d:650ms;--delay:-600ms"></i>
+            <i style="top:55%;width:45%;--d:950ms;--delay:-50ms"></i>
+            <i style="top:64%;width:55%;--d:800ms;--delay:-500ms"></i>
+            <i style="top:76%;width:30%;--d:1200ms;--delay:-300ms"></i>
+            <i style="top:88%;width:50%;--d:750ms;--delay:-700ms"></i>
+          </div>
+          <div class="hero__rings"><span></span><span></span><span></span></div>
+          <div class="hero-emblem">
+            <div class="hero-emblem__shadow"></div>
+            <div class="hero-emblem__tilt">
+              <div class="hero-emblem__spin">
+                <div class="hero-emblem__edge"></div>
+                <div class="hero-emblem__edge"></div>
+                <div class="hero-emblem__edge"></div>
+                <div class="hero-emblem__face" data-svg="emblem"></div>
+                <div class="hero-emblem__face hero-emblem__face--back" data-svg="emblem"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero__scroll" aria-hidden="true"><span></span><em data-i18n="hero.scroll">Scrolla</em></div>
+    </section>
+
+    <!-- SÅ FUNKAR DET -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow" data-i18n="how.eyebrow" data-reveal>Så funkar det</span>
+          <h2 class="section-title" data-i18n="how.title" data-reveal>Tre steg till en bil som doftar du</h2>
+        </div>
+        <div class="steps">
+          <article class="step" data-reveal>
+            <div class="step__icon" data-svg="drop"></div>
+            <h3 data-i18n="how.1.title">Droppa</h3>
+            <p data-i18n="how.1.text">Droppa 2 ml av din valda doft på tygbiten.</p>
+          </article>
+          <article class="step" data-reveal style="--d:80ms">
+            <div class="step__icon" data-svg="clip"></div>
+            <h3 data-i18n="how.2.title">Kläm fast</h3>
+            <p data-i18n="how.2.text">Klämman fäster paden på ventilationen på några sekunder.</p>
+          </article>
+          <article class="step" data-reveal style="--d:160ms">
+            <div class="step__icon" data-svg="car"></div>
+            <h3 data-i18n="how.3.title">Kör</h3>
+            <p data-i18n="how.3.text">Luftflödet sprider doften – i 2–3 veckor.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUKTEN I DELAR: flyger isär vid scroll -->
+    <section class="parts" data-exploded aria-labelledby="parts-title">
+      <div class="parts__sticky">
+        <div class="container section-head section-head--center" style="margin-bottom:0">
+          <span class="eyebrow" data-i18n="parts.eyebrow">Produkten i delar</span>
+          <h2 class="section-title" id="parts-title" data-i18n="parts.title">Fyra delar. En känsla.</h2>
+          <p class="lead" data-i18n="parts.lead">Scrolla för att se vad som ingår i varje paket.</p>
+        </div>
+        <div class="parts__stage">
+          <div class="parts__orbit" aria-hidden="true"></div>
+          <div class="part part--fabric">
+            <div class="part__visual" data-svg="fabric"></div>
+            <div class="part__label"><strong data-i18n="parts.fabric">Tygbit</strong><span data-i18n="parts.fabric.text">Suger upp doften och släpper den långsamt.</span></div>
+          </div>
+          <div class="part part--deco">
+            <div class="part__visual" data-svg="deco"></div>
+            <div class="part__label"><strong data-i18n="parts.deco">3D-dekoration</strong><span data-i18n="parts.deco.text">3D-printad design som gör bilen snyggare.</span></div>
+          </div>
+          <div class="part part--drop">
+            <div class="part__visual" data-svg="drop"></div>
+            <div class="part__label"><strong data-i18n="parts.scent">2 ml doft</strong><span data-i18n="parts.scent.text">Valfri doft som räcker 2–3 veckor.</span></div>
+          </div>
+          <div class="part part--clip">
+            <div class="part__visual" data-svg="clip"></div>
+            <div class="part__label"><strong data-i18n="parts.clip">Klämma</strong><span data-i18n="parts.clip.text">Fäster stadigt på ventilationen.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track"><span data-i18n="slogan">Liten detalj. Stor skillnad.</span><span data-i18n="slogan">Liten detalj. Stor skillnad.</span><span data-i18n="slogan">Liten detalj. Stor skillnad.</span><span data-i18n="slogan">Liten detalj. Stor skillnad.</span><span data-i18n="slogan">Liten detalj. Stor skillnad.</span><span data-i18n="slogan">Liten detalj. Stor skillnad.</span><span data-i18n="slogan">Liten detalj. Stor skillnad.</span><span data-i18n="slogan">Liten detalj. Stor skillnad.</span></div>
+  </div>
+
+    <!-- DOFTVÄLJARE -->
+    <section class="section" id="dofter">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow" data-i18n="scents.eyebrow" data-reveal>Dofterna</span>
+          <h2 class="section-title" data-i18n="scents.title" data-reveal>Välj din doft</h2>
+          <p class="lead" data-i18n="scents.lead" data-reveal>Sex dofter, sex stämningar. Klicka på en doft för att känna in den.</p>
+        </div>
+
+        <div class="scent-picker" data-scent-picker>
+          <div class="scent-picker__stage" data-reveal>
+            <div class="scent-picker__aura"></div>
+            <div class="scent-picker__ring scent-picker__ring--2"></div>
+            <div class="scent-picker__ring"></div>
+            <div class="scent-picker__pad" data-svg="pad"></div>
+          </div>
+          <div class="scent-picker__info" data-reveal style="--d:80ms">
+            <span class="scent-picker__index">01 / 06</span>
+            <h3 class="scent-picker__name" aria-live="polite">Cherry Blossom</h3>
+            <p class="scent-picker__desc" aria-live="polite">Doften av ett klassiskt rosa körsbärsträd.</p>
+            <div class="scent-picker__swatches"></div>
+            <div class="scent-picker__actions">
+            <a class="btn btn--primary scent-picker__cta" href="produkt.html#bygg"><span data-i18n="scents.cta">Välj den här doften</span><span data-svg="arrow"></span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAKET -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head section-head--center">
+          <span class="eyebrow" data-i18n="packs.eyebrow" data-reveal>Paket</span>
+          <h2 class="section-title" data-i18n="packs.title" data-reveal>Ju fler, desto mer sparar du</h2>
+        </div>
+        <div class="pack-grid">
+            <a class="pack-card" href="produkt.html#bygg" data-reveal style="--d:0ms">
+              
+              <span class="pack-card__dots" aria-hidden="true"><i></i></span>
+              <span class="pack-card__name" data-i18n="pack.1">1-pack</span>
+              <span class="pack-card__pads" data-pads="1">1 doftpad</span>
+              <span class="pack-card__price" data-price="79">79 kr</span>
+              <span class="pack-card__single" data-i18n="pack.single">Ett komplett paket</span>
+            </a>
+            <a class="pack-card pack-card--popular" href="produkt.html#bygg" data-reveal style="--d:70ms">
+              <span class="badge" data-i18n="pack.popular">Populärast</span>
+              <span class="pack-card__dots" aria-hidden="true"><i></i><i></i></span>
+              <span class="pack-card__name" data-i18n="pack.2">2-pack</span>
+              <span class="pack-card__pads" data-pads="2">2 doftpads</span>
+              <span class="pack-card__price" data-price="129">129 kr</span>
+              <span class="pack-card__save" data-save="29">Spara 29 kr</span>
+            </a>
+            <a class="pack-card" href="produkt.html#bygg" data-reveal style="--d:140ms">
+              
+              <span class="pack-card__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="pack-card__name" data-i18n="pack.3">3-pack</span>
+              <span class="pack-card__pads" data-pads="3">3 doftpads</span>
+              <span class="pack-card__price" data-price="199">199 kr</span>
+              <span class="pack-card__save" data-save="38">Spara 38 kr</span>
+            </a>
+        </div>
+        <div class="packs-cta" data-reveal>
+          <a class="btn btn--ghost" href="produkt.html#bygg"><span data-i18n="packs.cta">Se alla paket</span><span data-svg="arrow"></span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-head section-head--center">
+          <span class="eyebrow" data-i18n="faq.eyebrow" data-reveal>FAQ</span>
+          <h2 class="section-title" data-i18n="faq.title" data-reveal>Vanliga frågor</h2>
+        </div>
+        <div class="faq">
+          <details data-reveal style="--d:0ms">
+            <summary><span data-i18n="faq.1.q">Hur länge räcker doften?</span><i aria-hidden="true"></i></summary>
+            <p data-i18n="faq.1.a">En påfyllning på 2 ml räcker i 2–3 veckor, beroende på hur ofta du kör och hur mycket fläkten används. Sedan droppar du bara på en refill för 49 kr.</p>
+          </details>
+          <details data-reveal style="--d:50ms">
+            <summary><span data-i18n="faq.2.q">Passar klämman i min bil?</span><i aria-hidden="true"></i></summary>
+            <p data-i18n="faq.2.a">Klämman passar de flesta ventilationsgaller, både med liggande och stående lameller.</p>
+          </details>
+          <details data-reveal style="--d:100ms">
+            <summary><span data-i18n="faq.3.q">Hur fyller jag på?</span><i aria-hidden="true"></i></summary>
+            <p data-i18n="faq.3.a">Droppa refill-doften direkt på tygbiten – du behöver ingen ny pad. Du kan byta doft när du vill.</p>
+          </details>
+          <details data-reveal style="--d:150ms">
+            <summary><span data-i18n="faq.4.q">Hur betalar jag?</span><i aria-hidden="true"></i></summary>
+            <p data-i18n="faq.4.a">Med Swish. Efter beställningen får du ett ordernummer, totalbeloppet och en Swish-QR-kod (dator) eller en knapp som öppnar Swish direkt (mobil).</p>
+          </details>
+          <details data-reveal style="--d:200ms">
+            <summary><span data-i18n="faq.5.q">Vad kostar frakten?</span><i aria-hidden="true"></i></summary>
+            <p data-i18n="faq.5.a">Fast pris 49 kr för alla beställningar. Vi skickar hem till dig – det finns ingen upphämtning.</p>
+          </details>
+          <details data-reveal style="--d:250ms">
+            <summary><span data-i18n="faq.6.q">Vilka är AutoScent UF?</span><i aria-hidden="true"></i></summary>
+            <p data-i18n="faq.6.a">Ett UF-företag från Vimmerby som vill göra varje bilresa lite trevligare – en liten detalj i taget.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a class="brand" href="index.html" aria-label="AutoScent UF">
+            <span class="brand__logo" data-svg="emblem" data-img="images/logo.png" data-img-alt="AutoScent UF"></span>
+            <span class="brand__name">AutoScent<small>UF</small></span>
+          </a>
+          <p data-i18n="footer.tagline">Doftpads till bilen från Vimmerby.</p>
+          <p class="footer__slogan metal-text" data-i18n="slogan">Liten detalj. Stor skillnad.</p>
+        </div>
+        <div>
+          <h2 class="footer__title" data-i18n="footer.pages">Sidor</h2>
+          <ul class="footer__list">
+            <li><a href="index.html" data-i18n="nav.home">Hem</a></li>
+            <li><a href="produkt.html" data-i18n="nav.product">Produkt &amp; dofter</a></li>
+            <li><a href="kassa.html" data-i18n="nav.checkout">Kassa</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer__title" data-i18n="footer.contact">Kontakt</h2>
+          <ul class="footer__list">
+            <li><a data-contact="email" href="mailto:lars.lingefjord-bogren@edu.vimmerby.se"><i data-svg="mail"></i><span>lars.lingefjord-bogren@edu.vimmerby.se</span></a></li>
+            <li><a data-contact="phone" href="tel:+46793028307"><i data-svg="phone"></i><span>079-302 83 07</span></a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer__title" data-i18n="footer.follow">Följ oss</h2>
+          <ul class="footer__list">
+            <li><a data-contact="instagram" href="https://instagram.com/autoscent_uf" target="_blank" rel="noopener"><i data-svg="instagram"></i><span>@autoscent_uf</span></a></li>
+            <li><a data-contact="tiktok" href="https://tiktok.com/@autoscentuf" target="_blank" rel="noopener"><i data-svg="tiktok"></i><span>@autoscentuf</span></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span data-i18n="footer.rights">© 2026 AutoScent UF</span>
+        <span data-i18n="footer.uf">Ett UF-företag inom Ung Företagsamhet</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/svg.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/features.js"></script>
+</body>
+</html>
