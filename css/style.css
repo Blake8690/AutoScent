@@ -694,18 +694,19 @@ main { position: relative; z-index: 1; }
   box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12), 0 0 0 3px var(--bg), 0 0 0 5px var(--silver);
 }
 .swatch:focus-visible { outline-offset: 7px; }
-.swatches--lg { gap: 18px 14px; }
-.swatches--lg .swatch { width: 54px; height: 54px; margin-bottom: 22px; }
+.swatches--lg { gap: 18px 26px; }
+.swatches--lg .swatch { width: 54px; height: 54px; margin-bottom: 34px; }
 .swatch__label {
   position: absolute; left: 50%; top: calc(100% + 10px); transform: translateX(-50%);
+  width: 74px; text-align: center; line-height: 1.25;
   font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
-  white-space: nowrap; color: var(--faint); transition: color var(--fast) var(--ease);
+  color: var(--faint); transition: color var(--fast) var(--ease);
 }
 .swatch[aria-checked="true"] .swatch__label { color: var(--text); }
 @media (max-width: 480px) {
-  .swatches--lg { gap: 18px 8px; }
+  .swatches--lg { gap: 18px 10px; }
   .swatches--lg .swatch { width: 46px; height: 46px; }
-  .swatch__label { font-size: 9px; letter-spacing: 0.02em; }
+  .swatch__label { width: 56px; font-size: 9px; letter-spacing: 0.02em; }
 }
 
 /* ---------- Paket (teaser + byggare) ---------- */
