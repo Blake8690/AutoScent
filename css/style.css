@@ -539,12 +539,6 @@ main { position: relative; z-index: 1; }
   background: radial-gradient(circle at 30% 30%, rgba(197,204,212,0.18), transparent 70%);
 }
 .step__icon svg { width: 26px; height: 26px; color: var(--silver); }
-.step::after {
-  counter-increment: step; content: "0" counter(step);
-  position: absolute; top: 28px; right: 28px;
-  font-family: var(--font-display); font-style: italic; font-weight: 700; font-size: 42px;
-  color: transparent; -webkit-text-stroke: 1px var(--line-strong);
-}
 .step h3 { font-family: var(--font-display); font-style: italic; text-transform: uppercase; font-size: 30px; margin-bottom: 8px; }
 .step p { color: var(--muted); }
 @media (max-width: 760px) { .steps { grid-template-columns: 1fr; } }

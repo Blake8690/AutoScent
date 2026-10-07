@@ -147,7 +147,7 @@ const SVG = (() => {
     minus: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`
   };
 
-  const builders = { car, emblem, fabric, deco, drop, clip, pad };
+  const builders = { emblem, fabric, deco, "part-drop": drop, "part-clip": clip, pad };
 
   function render(root = document) {
     root.querySelectorAll("[data-svg]").forEach(el => {
