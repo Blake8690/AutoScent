@@ -238,7 +238,6 @@ function initBuilder() {
   if (!root) return;
 
   let size = 2;
-  let refills = 0;
   let scents = [ScentState.current, ScentState.current, ScentState.current];
 
   const padsHost = $(".builder__pads", root);
@@ -278,18 +277,15 @@ function initBuilder() {
     const packPrice = PRISER.pack[size];
     const ordinary = size * PRISER.pack[1];
     const save = ordinary - packPrice;
-    const total = packPrice + refills * PRISER.refill;
-    animateNumber(totalEl, total);
-    ordinaryEl.textContent = I18N.price(ordinary + refills * PRISER.refill);
+    animateNumber(totalEl, packPrice);
+    ordinaryEl.textContent = I18N.price(ordinary);
     ordinaryRow.hidden = save <= 0;
     saveEl.hidden = save <= 0;
     if (save > 0) {
       saveEl.textContent = I18N.t("pack.save", { amount: I18N.price(save) });
       saveEl.classList.remove("is-pop"); void saveEl.offsetWidth; saveEl.classList.add("is-pop");
     }
-    let line = I18N.t("builder.summaryPack", { n: size });
-    if (refills) line += ` + ${I18N.t("builder.summaryRefill", { n: refills })}`;
-    lineEl.textContent = line;
+    lineEl.textContent = I18N.t("builder.summaryPack", { n: size });
   }
 
   // Paketval
@@ -302,17 +298,8 @@ function initBuilder() {
     });
   });
 
-  const refillStepper = stepper($(".builder__refills .stepper", root), {
-    min: 0, max: 9, value: 0,
-    onChange: v => { refills = v; renderPrice(); }
-  });
-
   $(".builder__add", root).addEventListener("click", e => {
     Cart.addPack(size, scents.slice(0, size));
-    if (refills) Cart.addRefill(scents[0], refills);
-    refills = 0;
-    refillStepper.set(0);
-    renderPrice();
     const btn = e.currentTarget;
     btn.classList.add("is-added");
     setTimeout(() => btn.classList.remove("is-added"), 900);
