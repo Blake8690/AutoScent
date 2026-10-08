@@ -7,7 +7,7 @@
 
 const TRANSLATIONS = {
   sv: {
-    "meta.title.home": "AutoScent UF – Liten detalj. Stor skillnad.",
+    "meta.title.home": "AutoScent UF – Liten detalj, stor skillnad",
     "meta.title.product": "Produkt & dofter – AutoScent UF",
     "meta.title.checkout": "Kassa – AutoScent UF",
     "meta.description": "AutoScent UF – doftpads till bilen från Vimmerby. Droppa din favoritdoft, kläm fast på ventilationen och kör.",
@@ -21,7 +21,7 @@ const TRANSLATIONS = {
     "lang.switch": "Switch to English",
     "loader.label": "Laddar AutoScent",
 
-    "slogan": "Liten detalj. Stor skillnad.",
+    "slogan": "Liten detalj, stor skillnad",
     "currency": "kr",
 
     "hero.eyebrow": "Doftpads till bilen · Vimmerby",
@@ -196,7 +196,7 @@ const TRANSLATIONS = {
   },
 
   en: {
-    "meta.title.home": "AutoScent UF – Small detail. Big difference.",
+    "meta.title.home": "AutoScent UF – Small detail, big difference",
     "meta.title.product": "Product & scents – AutoScent UF",
     "meta.title.checkout": "Checkout – AutoScent UF",
     "meta.description": "AutoScent UF – car scent pads from Vimmerby, Sweden. Drop your favourite scent, clip it to the vent and drive.",
@@ -210,7 +210,7 @@ const TRANSLATIONS = {
     "lang.switch": "Byt till svenska",
     "loader.label": "Loading AutoScent",
 
-    "slogan": "Small detail. Big difference.",
+    "slogan": "Small detail, big difference",
     "currency": "SEK",
 
     "hero.eyebrow": "Car scent pads · Vimmerby, Sweden",
