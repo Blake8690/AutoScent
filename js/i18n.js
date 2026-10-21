@@ -89,6 +89,7 @@ const TRANSLATIONS = {
     "footer.pages": "Sidor",
     "footer.uf": "Ett UF-företag inom Ung Företagsamhet",
     "footer.rights": "© 2026 AutoScent UF",
+    "footer.credit": "Skapad av",
 
     "prod.eyebrow": "Produkt & dofter",
     "prod.title": "AutoScent-paden",
@@ -277,6 +278,7 @@ const TRANSLATIONS = {
     "footer.pages": "Pages",
     "footer.uf": "A student company within Junior Achievement Sweden (UF)",
     "footer.rights": "© 2026 AutoScent UF",
+    "footer.credit": "Made by",
 
     "prod.eyebrow": "Product & scents",
     "prod.title": "The AutoScent pad",

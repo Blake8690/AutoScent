@@ -973,6 +973,8 @@ main { position: relative; z-index: 1; }
 .footer__list a svg { width: 18px; height: 18px; flex: none; }
 .socials { display: flex; gap: 10px; }
 .footer__bottom { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; color: var(--faint); font-size: 13px; }
+.footer__credit a { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line-strong); transition: color var(--fast), text-decoration-color var(--fast); }
+.footer__credit a:hover { color: var(--text); text-decoration-color: var(--silver); }
 @media (max-width: 860px) { .footer__grid { grid-template-columns: 1fr 1fr; } .footer__brand { grid-column: 1 / -1; } }
 @media (max-width: 480px) { .footer__grid { grid-template-columns: 1fr; } }
 
