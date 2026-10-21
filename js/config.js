@@ -9,7 +9,7 @@ const SWISH_NUMMER = "KOMMER";
 
 // Kundens kontaktuppgifter
 const KONTAKT = {
-  epost: "charlie.sjöholm@edu.vimmerby.se",
+  epost: "charlie.sjoholm@edu.vimmerby.se",
   telefon: "0793028307",
   instagram: "https://instagram.com/autoscent_uf",
   tiktok: "https://tiktok.com/@autoscentuf"
@@ -19,7 +19,7 @@ const KONTAKT = {
 // (formsubmit.co). Inget konto eller nycklar behövs. Första gången någon
 // beställer får adressen ett mejl från FormSubmit – klicka "Activate Form"
 // en gång, sedan kommer alla ordrar fram.
-const ORDER_EPOST = "charlie.sjöholm@edu.vimmerby.se";
+const ORDER_EPOST = "charlie.sjoholm@edu.vimmerby.se";
 
 // Priser i kronor
 const PRISER = {
