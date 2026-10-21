@@ -9,22 +9,17 @@ const SWISH_NUMMER = "KOMMER";
 
 // Kundens kontaktuppgifter
 const KONTAKT = {
-  epost: "lars.lingefjord-bogren@edu.vimmerby.se",
+  epost: "charlie.sjöholm@edu.vimmerby.se",
   telefon: "0793028307",
   instagram: "https://instagram.com/autoscent_uf",
   tiktok: "https://tiktok.com/@autoscentuf"
 };
 
-// EmailJS – fyll i nycklarna från https://dashboard.emailjs.com
-// Mallen (template) kan använda variablerna som skickas i js/kassa.js:
-// {{to_email}} {{order_number}} {{customer_name}} {{customer_address}}
-// {{customer_email}} {{customer_phone}} {{order_items}} {{subtotal}}
-// {{shipping}} {{total}} {{language}}
-const EMAILJS = {
-  PUBLIC_KEY: "DIN_PUBLIC_KEY",
-  SERVICE_ID: "DIN_SERVICE_ID",
-  TEMPLATE_ID: "DIN_TEMPLATE_ID"
-};
+// Ordermejl – beställningar skickas till den här adressen via FormSubmit
+// (formsubmit.co). Inget konto eller nycklar behövs. Första gången någon
+// beställer får adressen ett mejl från FormSubmit – klicka "Activate Form"
+// en gång, sedan kommer alla ordrar fram.
+const ORDER_EPOST = "charlie.sjöholm@edu.vimmerby.se";
 
 // Priser i kronor
 const PRISER = {

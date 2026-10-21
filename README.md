@@ -20,28 +20,11 @@ Allt ligger i **`js/config.js`**:
 - `SWISH_NUMMER` – står på `"KOMMER"` tills vidare. Då visas ett meddelande
   istället för QR-kod/knapp. Skriv in numret (t.ex. `"123 456 78 90"`) så visas
   Swish-QR på dator och "Öppna Swish"-knapp på mobil automatiskt.
-- `EMAILJS` – `PUBLIC_KEY`, `SERVICE_ID` och `TEMPLATE_ID` från
-  [EmailJS](https://dashboard.emailjs.com). Tills nycklarna finns loggas ordern
-  bara i webbläsarens konsol.
-
-### EmailJS-mall
-
-Skapa en mall med mottagare `{{to_email}}` och t.ex. detta innehåll:
-
-```
-Ny beställning {{order_number}}
-
-Kund: {{customer_name}}
-Adress: {{customer_address}}
-E-post: {{customer_email}}
-Telefon: {{customer_phone}}
-
-{{order_items}}
-
-Delsumma: {{subtotal}}
-Frakt: {{shipping}}
-Totalt: {{total}}
-```
+- `ORDER_EPOST` – adressen som får alla beställningar. Ordern skickas via
+  [FormSubmit](https://formsubmit.co), så inget konto eller nycklar behövs.
+  **Första beställningen:** FormSubmit skickar ett aktiveringsmejl till adressen.
+  Klicka på "Activate Form" i det mejlet en gång, sedan kommer alla ordrar fram.
+  Gör gärna en testbeställning själva innan lansering så att det är aktiverat.
 
 ## Övrigt
 

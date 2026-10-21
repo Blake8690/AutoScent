@@ -125,6 +125,7 @@
                 </div>
               </div>
               <p class="co-note"><span data-svg="car"></span><span data-i18n="co.deliveryNote">Vi skickar alla beställningar med frakt – ingen upphämtning.</span></p>
+              <p class="co-error" role="alert" hidden></p>
               <div class="co-form-actions">
                 <button type="button" class="link-btn co-back">← <span data-i18n="co.back">Tillbaka</span></button>
                 <button type="submit" class="btn btn--primary"><span class="btn__label">Beställ</span><span data-svg="arrow"></span></button>
@@ -144,7 +145,6 @@
               <p class="co-address"></p>
               <p class="co-pay-info" data-i18n="co.payInfo">Betala med Swish för att slutföra beställningen. Ordernumret följer med som meddelande.</p>
               <div class="swish"></div>
-              <p class="co-mail" hidden></p>
               <a class="btn btn--ghost" href="index.html"><span data-i18n="co.backHome">Till startsidan</span></a>
             </div>
           </section>
@@ -185,7 +185,7 @@
         <div>
           <h2 class="footer__title" data-i18n="footer.contact">Kontakt</h2>
           <ul class="footer__list">
-            <li><a data-contact="email" href="mailto:lars.lingefjord-bogren@edu.vimmerby.se"><i data-svg="mail"></i><span>lars.lingefjord-bogren@edu.vimmerby.se</span></a></li>
+            <li><a data-contact="email" href="mailto:charlie.sjöholm@edu.vimmerby.se"><i data-svg="mail"></i><span>charlie.sjöholm@edu.vimmerby.se</span></a></li>
             <li><a data-contact="phone" href="tel:+46793028307"><i data-svg="phone"></i><span>079-302 83 07</span></a></li>
           </ul>
         </div>
@@ -210,7 +210,6 @@
   <script src="js/main.js"></script>
   <script src="js/features.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script src="js/kassa.js"></script>
 </body>
 </html>

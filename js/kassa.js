@@ -145,47 +145,57 @@ const Checkout = (() => {
     return `AS-${String(d.getFullYear()).slice(2)}${pad(d.getMonth() + 1)}${pad(d.getDate())}-${rand}`;
   }
 
-  /* ---------- EmailJS ---------- */
-  function emailConfigured() {
-    return typeof emailjs !== "undefined" &&
-      !Object.values(EMAILJS).some(v => !v || v.startsWith("DIN_"));
+  /* ---------- Ordermejl via FormSubmit ----------
+     Ordern skickas till ORDER_EPOST (js/config.js) via formsubmit.co.
+     Första gången skickar FormSubmit ett aktiveringsmejl till den adressen –
+     klicka "Activate Form" i det mejlet, sedan kommer alla ordrar fram. */
+  function orderFields(order) {
+    const c = order.customer;
+    // Fältnamnen blir rubrikerna i mejlet
+    const fields = {
+      _subject: `Ny beställning ${order.number} – ${order.total} kr`,
+      _template: "table",
+      _captcha: "false",
+      "Ordernummer": order.number,
+      "Namn": c.name,
+      "Adress": `${c.street}, ${c.zip} ${c.city}`,
+      "E-post": c.email || "-",
+      "Telefon": c.phone || "-"
+    };
+    if (c.email) fields._replyto = c.email;
+    order.items.forEach((item, i) => {
+      const price = `${Cart.itemPrice(item)} kr`;
+      fields[`Vara ${i + 1}`] = item.type === "pack"
+        ? `${tSv("co.packItem", { n: item.size })} (${price}) – ${item.scents.map((sc, j) => `Pad ${j + 1}: ${scentById(sc).namn}`).join(", ")}`
+        : `${tSv("co.refillItem")} (${price}) – ${scentById(item.scent).namn}`;
+    });
+    Object.assign(fields, {
+      "Delsumma": `${order.subtotal} kr`,
+      "Frakt": `${PRISER.frakt} kr`,
+      "Totalt att betala": `${order.total} kr`,
+      "Språk på sidan": I18N.lang
+    });
+    return fields;
   }
 
   async function sendOrderEmail(order) {
-    if (!emailConfigured()) {
-      console.warn("[AutoScent] EmailJS är inte konfigurerat – fyll i nycklarna i js/config.js. Ordern:", order);
-      return "skipped";
-    }
-    const lines = order.items.map(item => {
-      const price = `${Cart.itemPrice(item)} kr`;
-      if (item.type === "pack") {
-        const scents = item.scents.map((s, i) => `   Pad ${i + 1}: ${scentById(s).namn}`).join("\n");
-        return `${tSv("co.packItem", { n: item.size })} – ${price}\n${scents}`;
+    try {
+      const res = await fetch(`https://formsubmit.co/ajax/${ORDER_EPOST}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(orderFields(order))
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || String(data.success) !== "true") {
+        const msg = data.message || `HTTP ${res.status}`;
+        console.error("[AutoScent] Ordern kunde inte mejlas:", msg);
+        return { ok: false, msg };
       }
-      return `${tSv("co.refillItem")} – ${price}\n   ${scentById(item.scent).namn}`;
-    }).join("\n\n");
-
-    const c = order.customer;
-    const params = {
-      to_email: KONTAKT.epost,
-      order_number: order.number,
-      customer_name: c.name,
-      customer_address: `${c.street}, ${c.zip} ${c.city}`,
-      customer_email: c.email || "–",
-      customer_phone: c.phone || "–",
-      order_items: lines,
-      subtotal: `${order.subtotal} kr`,
-      shipping: `${PRISER.frakt} kr`,
-      total: `${order.total} kr`,
-      language: I18N.lang
-    };
-    // Avbryt efter 10 s så att kunden inte väntar för evigt
-    const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), 10000));
-    await Promise.race([
-      emailjs.send(EMAILJS.SERVICE_ID, EMAILJS.TEMPLATE_ID, params, { publicKey: EMAILJS.PUBLIC_KEY }),
-      timeout
-    ]);
-    return "sent";
+      return { ok: true };
+    } catch (err) {
+      console.error("[AutoScent] Ordern kunde inte mejlas:", err);
+      return { ok: false, msg: String((err && err.message) || err) };
+    }
   }
 
   /* ---------- Swish ---------- */
@@ -199,15 +209,9 @@ const Checkout = (() => {
   function swishQrData(order) {
     return `C${swishDigits()};${order.total};${order.number};0`;
   }
-  // Swish-länk för mobil (öppnar appen med ifyllt belopp och meddelande)
+  // Swish-länk för mobil (öppnar appen med ifyllt nummer, belopp och meddelande)
   function swishAppLink(order) {
-    const data = {
-      version: 1,
-      payee: { value: swishDigits() },
-      amount: { value: order.total },
-      message: { value: order.number, editable: false }
-    };
-    return `swish://payment?data=${encodeURIComponent(JSON.stringify(data))}`;
+    return `https://app.swish.nu/1/p/sw/?sw=${encodeURIComponent(swishDigits())}&amt=${order.total}&cur=SEK&msg=${encodeURIComponent(order.number)}&src=qr`;
   }
 
   function renderSwish(order, mode) {
@@ -248,10 +252,6 @@ const Checkout = (() => {
     els.orderTotal.textContent = I18N.price(order.total);
     const c = order.customer;
     els.address.textContent = `${c.name}, ${c.street}, ${c.zip} ${c.city}`;
-    els.mailStatus.hidden = order.mail === "skipped";
-    els.mailStatus.className = `co-mail co-mail--${order.mail}`;
-    els.mailStatus.textContent = order.mail === "sent" ? I18N.t("co.mailOk")
-      : order.mail === "failed" ? I18N.t("co.mailFail", { email: KONTAKT.epost }) : "";
     renderSwish(order);
     renderSummary(order);
     els.summary.hidden = false;
@@ -271,21 +271,30 @@ const Checkout = (() => {
       items: JSON.parse(JSON.stringify(Cart.items)),
       subtotal,
       total: subtotal + PRISER.frakt,
-      customer: data,
-      mail: "skipped"
+      customer: data
     };
 
     const btn = $("button[type='submit']", form);
     btn.disabled = true;
     btn.classList.add("is-loading");
     $(".btn__label", btn).textContent = I18N.t("co.sending");
+    els.error.hidden = true;
 
-    try { order.mail = await sendOrderEmail(order); }
-    catch (err) { console.error("[AutoScent] Kunde inte skicka ordern:", err); order.mail = "failed"; }
+    const result = await sendOrderEmail(order);
 
     btn.disabled = false;
     btn.classList.remove("is-loading");
     $(".btn__label", btn).textContent = I18N.t("co.order");
+
+    if (!result.ok) {
+      // Ordern kom inte fram – behåll varukorgen så att kunden kan försöka igen
+      els.error.textContent = I18N.t("co.sendError", { email: KONTAKT.epost });
+      const detail = document.createElement("small");
+      detail.textContent = result.msg;
+      els.error.appendChild(detail);
+      els.error.hidden = false;
+      return;
+    }
 
     lastOrder = order;
     try { sessionStorage.setItem("autoscent-last-order", JSON.stringify(order)); } catch (err) {}
@@ -309,7 +318,7 @@ const Checkout = (() => {
       orderNo: $(".co-order-no"),
       orderTotal: $(".co-order-total"),
       address: $(".co-address"),
-      mailStatus: $(".co-mail"),
+      error: $(".co-error"),
       swish: $(".swish")
     });
 
@@ -334,9 +343,6 @@ const Checkout = (() => {
 
     renderCart();
     goTo("cart", { scroll: false });
-    if (EMAILJS.PUBLIC_KEY && !EMAILJS.PUBLIC_KEY.startsWith("DIN_") && typeof emailjs !== "undefined") {
-      emailjs.init({ publicKey: EMAILJS.PUBLIC_KEY });
-    }
   }
 
   return { init };

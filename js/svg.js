@@ -172,5 +172,5 @@ const SVG = (() => {
     });
   }
 
-  return { render, optionalImages, icons, ...builders };
+  return { render, optionalImages, icons, car, emblem, fabric, deco, drop, clip, pad };
 })();
