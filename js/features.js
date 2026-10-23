@@ -353,10 +353,6 @@ function initFaq() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  initScentPicker();
-  initExploded();
-  initGauge();
-  initBuilder();
-  initRefill();
-  initFaq();
+  [initScentPicker, initExploded, initGauge, initBuilder, initRefill, initFaq]
+    .forEach(fn => safeRun(fn.name, fn));
 });

@@ -326,18 +326,17 @@ function initContact() {
   });
 }
 
-/* ---------- Start ---------- */
+/* ---------- Start ----------
+   Varje del startas för sig: kraschar en del (t.ex. ett skrivfel i en fil)
+   fortsätter resten av sidan att fungera, och felet syns i konsolen. */
+function safeRun(name, fn) {
+  try { fn(); } catch (err) { console.error(`[AutoScent] ${name} kunde inte starta:`, err); }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  SVG.render();
-  SVG.optionalImages();
-  I18N.apply();
-  initLoader();
-  initLanguage();
-  initHeader();
-  initContact();
-  initSpeedLines();
-  initSplitHeadings();
-  initReveal();
-  initHeroEmblem();
-  initButtonShine();
+  safeRun("Laddningsskärm", initLoader);
+  safeRun("Grafik", () => { SVG.render(); SVG.optionalImages(); });
+  safeRun("Språk", () => I18N.apply());
+  [initLanguage, initHeader, initContact, initSpeedLines, initSplitHeadings, initReveal, initHeroEmblem, initButtonShine]
+    .forEach(fn => safeRun(fn.name, fn));
 });
