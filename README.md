@@ -17,7 +17,7 @@ lägg upp mappen på valfritt webbhotell (t.ex. GitHub Pages, Netlify).
 
 Allt ligger i **`js/config.js`**:
 
-- `SWISH_NUMMER` – står på `"KOMMER"` tills vidare. Då visas ett meddelande
+- `SWISH_NUMMER` – företagets Swish-nummer (123 708 34 05). Står det `"KOMMER"` visas ett meddelande
   istället för QR-kod/knapp. Skriv in numret (t.ex. `"123 456 78 90"`) så visas
   Swish-QR på dator och "Öppna Swish"-knapp på mobil automatiskt.
 - `ORDER_EPOST` – adressen som får alla beställningar. Ordern skickas via

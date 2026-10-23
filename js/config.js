@@ -5,7 +5,7 @@
 
 // Swish-nummer som betalningen ska gå till (t.ex. "1231234567").
 // Så länge värdet är "KOMMER" visas ett meddelande istället för QR/knapp.
-const SWISH_NUMMER = "KOMMER";
+const SWISH_NUMMER = "123 708 34 05";
 
 // Kundens kontaktuppgifter
 const KONTAKT = {
